@@ -1,10 +1,280 @@
 {
-  "version": 2,
+  "version": 3,
+  "nota": "El orden es el del anillo: las 7 agradables arriba y, enfrente de cada una, su contraria (felicidad-tristeza, gratitud-sin rumbo, amor-soledad, esperanza-desesperanza, confianza-inseguridad, motivación-desmotivación, calma-miedo).",
   "emociones": [
+    {
+      "id": "felicidad",
+      "nombre": "Felicidad / Alegría",
+      "descripcion": "Estás contento: algo salió bien o disfrutas donde estás.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "alegria",
+          "nombre": "Alegría",
+          "descripcion": "Te sientes feliz y con energía, y quieres aprovecharlo.",
+          "pistas": "happiness, joy, enjoy life, good days, smile"
+        },
+        {
+          "id": "satisfaccion-logro",
+          "nombre": "Satisfacción por un logro",
+          "descripcion": "Acabas de lograr algo y te sientes bien con el resultado.",
+          "pistas": "win, achievement, celebrate, milestone, results"
+        },
+        {
+          "id": "disfrutar-el-proceso",
+          "nombre": "Disfrutar el proceso",
+          "descripcion": "Te gusta el camino, no solo la meta.",
+          "pistas": "enjoy the process, love the grind, the journey, fun"
+        },
+        {
+          "id": "racha-ganadora",
+          "nombre": "Racha ganadora",
+          "descripcion": "Todo te está saliendo bien y sientes que nada te para.",
+          "pistas": "momentum, on a roll, success, stay hungry, don't get complacent"
+        }
+      ],
+      "intensamente": [
+        "alegria"
+      ]
+    },
+    {
+      "id": "gratitud",
+      "nombre": "Gratitud",
+      "descripcion": "Agradeces lo que tienes y a quienes te rodean.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "agradecimiento",
+          "nombre": "Agradecimiento",
+          "descripcion": "Valoras lo que tienes hoy.",
+          "pistas": "gratitude, grateful, thankful, count your blessings, appreciate"
+        },
+        {
+          "id": "bendecido",
+          "nombre": "Sentirte bendecido",
+          "descripcion": "Sientes que Dios o la vida te han dado mucho.",
+          "pistas": "blessed, God, gift, grace, lucky to be here"
+        },
+        {
+          "id": "valorar-a-los-tuyos",
+          "nombre": "Valorar a los tuyos",
+          "descripcion": "Aprecias a tu familia, a tus amigos o a tu equipo.",
+          "pistas": "family, friends, team, people who stood by you"
+        },
+        {
+          "id": "humildad",
+          "nombre": "Humildad",
+          "descripcion": "Reconoces que no llegaste solo y que te falta mucho por aprender.",
+          "pistas": "humble, humility, stay grounded, student"
+        }
+      ],
+      "intensamente": [
+        "alegria",
+        "verguenza"
+      ]
+    },
+    {
+      "id": "amor",
+      "nombre": "Amor / Conexión",
+      "descripcion": "Quieres a alguien, te sientes parte de algo o quieres dar a otros.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "amor-a-los-tuyos",
+          "nombre": "Amor por tu familia o pareja",
+          "descripcion": "Quieres cuidar, proteger y construir con quienes amas.",
+          "pistas": "love, wife, husband, kids, marriage, protect your family"
+        },
+        {
+          "id": "amistad-lealtad",
+          "nombre": "Amistad y lealtad",
+          "descripcion": "Valoras a quien está contigo en las buenas y en las malas.",
+          "pistas": "friendship, loyalty, brotherhood, real friends"
+        },
+        {
+          "id": "ganas-de-ayudar",
+          "nombre": "Ganas de ayudar o liderar",
+          "descripcion": "Quieres levantar a otros, guiar a tu equipo o dejar huella.",
+          "pistas": "leadership, lead by example, help others, serve, legacy, mentor"
+        },
+        {
+          "id": "admiracion",
+          "nombre": "Admiración",
+          "descripcion": "Alguien te inspira y quieres aprender de esa persona.",
+          "pistas": "admire, role model, heroes, inspiration"
+        }
+      ],
+      "intensamente": [
+        "verguenza",
+        "furia"
+      ]
+    },
+    {
+      "id": "esperanza",
+      "nombre": "Esperanza / Fe",
+      "descripcion": "Crees que lo mejor está por venir.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "esperanza",
+          "nombre": "Esperanza",
+          "descripcion": "Ves una salida y crees que las cosas pueden mejorar.",
+          "pistas": "hope, better days ahead, it gets better, light at the end of the tunnel"
+        },
+        {
+          "id": "optimismo",
+          "nombre": "Optimismo",
+          "descripcion": "Eliges ver lo bueno y las oportunidades.",
+          "pistas": "optimism, opportunity everywhere, possibilities, positive mindset"
+        },
+        {
+          "id": "fe",
+          "nombre": "Fe",
+          "descripcion": "Confías en Dios o en un propósito más grande que tú.",
+          "pistas": "faith, God, pray, trust the plan, purpose"
+        },
+        {
+          "id": "alivio",
+          "nombre": "Alivio",
+          "descripcion": "Pasó la tormenta y por fin respiras.",
+          "pistas": "relief, you made it through, survived, the storm passed"
+        }
+      ],
+      "intensamente": [
+        "alegria",
+        "desagrado"
+      ]
+    },
+    {
+      "id": "confianza",
+      "nombre": "Confianza / Orgullo",
+      "descripcion": "Te sientes seguro de ti y de lo que estás construyendo.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "seguridad-en-ti",
+          "nombre": "Seguridad en ti",
+          "descripcion": "Sabes lo que vales y lo que puedes lograr.",
+          "pistas": "confidence, self-belief, self-respect, know your worth"
+        },
+        {
+          "id": "orgullo-sano",
+          "nombre": "Orgullo de tu avance",
+          "descripcion": "Ves lo mucho que has crecido y te sientes orgulloso.",
+          "pistas": "proud, progress, how far you've come, earned it"
+        },
+        {
+          "id": "ego",
+          "nombre": "Ego / soberbia",
+          "descripcion": "El lado oscuro de la confianza: sientes que ya llegaste o que lo sabes todo.",
+          "pistas": "ego, arrogance, know-it-all, complacency after success"
+        }
+      ],
+      "intensamente": [
+        "alegria",
+        "ansiedad"
+      ]
+    },
+    {
+      "id": "motivacion",
+      "nombre": "Motivación / Ambición",
+      "descripcion": "Tienes hambre de más y ganas de ir por ello.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "ambicion",
+          "nombre": "Ambición",
+          "descripcion": "Quieres más de la vida y estás dispuesto a pagar el precio.",
+          "pistas": "ambition, hungry, want more, big goals, greatness"
+        },
+        {
+          "id": "determinacion",
+          "nombre": "Determinación",
+          "descripcion": "Ya decidiste y nada te va a detener.",
+          "pistas": "determination, commitment, all in, no plan B, relentless"
+        },
+        {
+          "id": "entusiasmo",
+          "nombre": "Entusiasmo",
+          "descripcion": "Estás emocionado por un proyecto o una nueva etapa.",
+          "pistas": "excited, new beginning, fired up, fresh start, new year"
+        },
+        {
+          "id": "curiosidad",
+          "nombre": "Ganas de aprender",
+          "descripcion": "Quieres aprender, leer y mejorar.",
+          "pistas": "learn, read, student of life, growth, knowledge"
+        }
+      ],
+      "intensamente": [
+        "alegria",
+        "furia"
+      ]
+    },
+    {
+      "id": "calma",
+      "nombre": "Calma / Paz",
+      "descripcion": "Estás en paz o quieres encontrarla.",
+      "valencia": "agradable",
+      "subs": [
+        {
+          "id": "serenidad",
+          "nombre": "Serenidad",
+          "descripcion": "Te sientes tranquilo y en control de ti mismo.",
+          "pistas": "calm, peace, composure, stoic, control what you can"
+        },
+        {
+          "id": "aceptacion",
+          "nombre": "Aceptación",
+          "descripcion": "Aceptas lo que no puedes cambiar y sigues adelante.",
+          "pistas": "acceptance, let it go, it is what it is, move on"
+        },
+        {
+          "id": "presente",
+          "nombre": "Estar presente",
+          "descripcion": "Quieres disfrutar el momento y a la gente que tienes enfrente.",
+          "pistas": "be present, enjoy the moment, balance, time with family"
+        }
+      ],
+      "intensamente": [
+        "tristeza",
+        "envidia"
+      ]
+    },
+    {
+      "id": "hartazgo",
+      "nombre": "Hartazgo / Asco",
+      "descripcion": "Estás harto de tu situación, de ti o de los demás.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "harto-de-tu-vida",
+          "nombre": "Harto de tu vida como está",
+          "descripcion": "Te da asco seguir igual: algo tiene que cambiar ya.",
+          "pistas": "disgust is the switch, fed up, sick and tired, enough is enough, rock bottom"
+        },
+        {
+          "id": "desprecio",
+          "nombre": "Desprecio",
+          "descripcion": "Te molestan la mediocridad, la hipocresía o la gente floja.",
+          "pistas": "contempt, mediocrity, weak people, hypocrisy, soft society"
+        },
+        {
+          "id": "decepcion-de-otros",
+          "nombre": "Decepción de otros",
+          "descripcion": "Alguien no estuvo a la altura de lo que esperabas.",
+          "pistas": "disappointed in people, let down, expectations of others"
+        }
+      ],
+      "intensamente": [
+        "desagrado"
+      ]
+    },
     {
       "id": "enojo",
       "nombre": "Enojo",
       "descripcion": "Coraje, rabia o molestia contra situaciones o personas.",
+      "valencia": "dificil",
       "subs": [
         {
           "id": "frustracion",
@@ -29,13 +299,23 @@
           "nombre": "Impaciencia",
           "descripcion": "Quieres resultados ya y te desespera lo que tarda.",
           "pistas": "overnight success, patience, long game, compounding, time"
+        },
+        {
+          "id": "indignacion",
+          "nombre": "Indignación",
+          "descripcion": "Te enoja cómo está el mundo, la política o la sociedad.",
+          "pistas": "outrage, politics, government, society, media, the state of the world"
         }
+      ],
+      "intensamente": [
+        "furia"
       ]
     },
     {
       "id": "agresion",
       "nombre": "Agresión",
       "descripcion": "Energía intensa, ganas de pelear o de arrasar; qué hacer con ella.",
+      "valencia": "dificil",
       "subs": [
         {
           "id": "ganas-de-explotar",
@@ -55,12 +335,17 @@
           "descripcion": "Quieres demostrarles a todos que se equivocaron contigo.",
           "pistas": "prove them wrong, make yourself impossible to ignore, let results talk"
         }
+      ],
+      "intensamente": [
+        "furia",
+        "ansiedad"
       ]
     },
     {
       "id": "tristeza",
       "nombre": "Tristeza / Depresión",
       "descripcion": "Estás abajo, sin ánimo, sin ver salida.",
+      "valencia": "dificil",
       "subs": [
         {
           "id": "desanimo",
@@ -97,212 +382,23 @@
           "nombre": "Negatividad / pesimismo",
           "descripcion": "Todo lo ves mal; la queja y el pesimismo te consumen.",
           "pistas": "negativity, pessimism, cynicism, seeing the worst in everything"
+        },
+        {
+          "id": "decepcion",
+          "nombre": "Decepción",
+          "descripcion": "Esperabas algo que no pasó y te dolió.",
+          "pistas": "disappointment, it didn't work out, rejection, lost the deal"
         }
-      ]
-    },
-    {
-      "id": "soledad",
-      "nombre": "Soledad",
-      "descripcion": "Te sientes solo, aislado o incomprendido en tu camino.",
-      "subs": [
-        {
-          "id": "sentirte-solo",
-          "nombre": "Sentirte solo",
-          "descripcion": "El camino se siente solitario; no tienes a nadie al lado.",
-          "pistas": "alone, lonely road, isolation, walking your path alone"
-        },
-        {
-          "id": "incomprendido",
-          "nombre": "Incomprendido / no encajas",
-          "descripcion": "Nadie entiende tu visión ni tu forma de vivir; te sientes diferente.",
-          "pistas": "people think you're crazy, not like them, misfit, different"
-        },
-        {
-          "id": "dejar-gente-atras",
-          "nombre": "Dejar gente atrás",
-          "descripcion": "Al crecer, amigos o familia se alejan o ya no encajan contigo.",
-          "pistas": "outgrowing people, changing circles, losing friends, who you surround yourself with"
-        },
-        {
-          "id": "sin-apoyo",
-          "nombre": "Sin apoyo",
-          "descripcion": "Nadie te ayuda ni te respalda; te toca solo.",
-          "pistas": "no one is coming to save you, pick yourself, nobody will do it for you"
-        }
-      ]
-    },
-    {
-      "id": "miedo",
-      "nombre": "Miedo / Ansiedad",
-      "descripcion": "Nervios, preocupación, miedo a lo que pueda pasar.",
-      "subs": [
-        {
-          "id": "miedo-a-fallar",
-          "nombre": "Miedo a fallar",
-          "descripcion": "No te lanzas por miedo a equivocarte o perder.",
-          "pistas": "fear of failure, risk, playing it safe, taking the shot"
-        },
-        {
-          "id": "que-diran",
-          "nombre": "El qué dirán",
-          "descripcion": "Te frena la opinión, el juicio o la burla de los demás.",
-          "pistas": "what people think, judgment, approval, being embarrassed"
-        },
-        {
-          "id": "incertidumbre",
-          "nombre": "Incertidumbre",
-          "descripcion": "No sabes qué va a pasar; te asusta el cambio y lo desconocido.",
-          "pistas": "uncertainty, change, unknown, comfort zone, chaos in the world"
-        },
-        {
-          "id": "presion",
-          "nombre": "Presión / estrés",
-          "descripcion": "Sientes el peso de expectativas, responsabilidades o del momento.",
-          "pistas": "pressure, stress, overwhelm, anxiety, high stakes"
-        }
-      ]
-    },
-    {
-      "id": "inseguridad",
-      "nombre": "Inseguridad",
-      "descripcion": "No te sientes suficiente; dudas de ti.",
-      "subs": [
-        {
-          "id": "dudar-de-ti",
-          "nombre": "Dudar de ti",
-          "descripcion": "No crees poder lograrlo.",
-          "pistas": "self-doubt, self-belief, confidence, self-image"
-        },
-        {
-          "id": "compararte",
-          "nombre": "Compararte",
-          "descripcion": "Ves a otros adelante y te sientes menos; envidia.",
-          "pistas": "comparison, social media, envy, others' success, jealousy"
-        },
-        {
-          "id": "no-ser-suficiente",
-          "nombre": "No ser suficiente",
-          "descripcion": "Sientes que te falta talento, estudios u origen para ganar.",
-          "pistas": "no degree, no talent, background, not smart enough, impostor"
-        },
-        {
-          "id": "esperar-permiso",
-          "nombre": "Esperar permiso",
-          "descripcion": "Buscas validación o aprobación antes de actuar.",
-          "pistas": "permission, validation, approval, someone to tell you it's time"
-        }
-      ]
-    },
-    {
-      "id": "desmotivacion",
-      "nombre": "Desmotivación",
-      "descripcion": "Sin ganas de hacer lo que sabes que tienes que hacer.",
-      "subs": [
-        {
-          "id": "flojera",
-          "nombre": "Flojera / sin ganas",
-          "descripcion": "No tienes motivación ni energía para empezar.",
-          "pistas": "motivation, don't feel like it, lazy, manufacture motivation"
-        },
-        {
-          "id": "procrastinacion",
-          "nombre": "Procrastinación",
-          "descripcion": "Lo dejas para después o esperas el momento perfecto.",
-          "pistas": "urgency, someday, later, perfect moment, start now"
-        },
-        {
-          "id": "estancamiento",
-          "nombre": "Estancamiento / conformismo",
-          "descripcion": "Te acomodaste: vives en automático o en la mediocridad.",
-          "pistas": "comfort, complacency, average, settling, mediocrity, autopilot"
-        },
-        {
-          "id": "indisciplina",
-          "nombre": "Falta de disciplina",
-          "descripcion": "Empiezas y no sostienes; rompes las promesas que te haces.",
-          "pistas": "discipline, consistency, habits, promises to yourself, standards"
-        }
-      ]
-    },
-    {
-      "id": "agotamiento",
-      "nombre": "Agotamiento",
-      "descripcion": "Cansado, al límite, cargando demasiado.",
-      "subs": [
-        {
-          "id": "cansancio",
-          "nombre": "Cansancio",
-          "descripcion": "Estás agotado física o mentalmente.",
-          "pistas": "tired, exhausted, burnout, drained"
-        },
-        {
-          "id": "ganas-de-rendirte",
-          "nombre": "Ganas de rendirte",
-          "descripcion": "Quieres tirar la toalla.",
-          "pistas": "quit, give up, keep going, keep pushing, one more day"
-        },
-        {
-          "id": "carga-pesada",
-          "nombre": "Carga pesada / adversidad",
-          "descripcion": "La vida te está pegando duro o cargas responsabilidades enormes.",
-          "pistas": "hard times, adversity, struggle, heavy loads, storms, suffering"
-        }
-      ]
-    },
-    {
-      "id": "culpa",
-      "nombre": "Culpa / Arrepentimiento",
-      "descripcion": "Cargas con lo que hiciste o con lo que dejaste de hacer.",
-      "subs": [
-        {
-          "id": "arrepentimiento",
-          "nombre": "Arrepentimiento",
-          "descripcion": "Te duele lo que no hiciste o el tiempo que perdiste.",
-          "pistas": "regret, wasted time, what could have been, don't die with regret"
-        },
-        {
-          "id": "errores-del-pasado",
-          "nombre": "Errores del pasado",
-          "descripcion": "No te perdonas, cargas con tu pasado o repites los mismos errores.",
-          "pistas": "past mistakes, redemption, fresh start, your past doesn't define you, repeating the same mistakes, learning from mistakes"
-        },
-        {
-          "id": "verguenza",
-          "nombre": "Vergüenza",
-          "descripcion": "Te avergüenza dónde estás o quién has sido.",
-          "pistas": "shame, embarrassed, disgusted with yourself, looking in the mirror"
-        }
-      ]
-    },
-    {
-      "id": "rechazo",
-      "nombre": "Rechazo",
-      "descripcion": "Críticas, burlas, traiciones o gente que no cree en ti.",
-      "subs": [
-        {
-          "id": "criticas",
-          "nombre": "Críticas y burlas",
-          "descripcion": "Te critican, se burlan o te atacan.",
-          "pistas": "haters, critics, ridicule, trolls, negativity"
-        },
-        {
-          "id": "no-creen-en-ti",
-          "nombre": "No creen en ti",
-          "descripcion": "Familia, amigos o jefes dudan de ti.",
-          "pistas": "doubters, nobody believed in you, told you you couldn't"
-        },
-        {
-          "id": "traicion",
-          "nombre": "Traición",
-          "descripcion": "Alguien cercano te falló o te dio la espalda.",
-          "pistas": "betrayal, fake friends, loyalty, backstabbing"
-        }
+      ],
+      "intensamente": [
+        "tristeza"
       ]
     },
     {
       "id": "sin-rumbo",
       "nombre": "Sin rumbo",
       "descripcion": "Perdido: sin propósito o sin saber qué hacer.",
+      "valencia": "dificil",
       "subs": [
         {
           "id": "sin-proposito",
@@ -328,7 +424,320 @@
           "descripcion": "Logras cosas pero nada te llena; no valoras lo que tienes o nunca es suficiente.",
           "pistas": "gratitude vs hunger, never satisfied, appreciate what you have, fulfillment"
         }
+      ],
+      "intensamente": [
+        "ennui",
+        "ansiedad"
+      ]
+    },
+    {
+      "id": "soledad",
+      "nombre": "Soledad",
+      "descripcion": "Te sientes solo, aislado o incomprendido en tu camino.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "sentirte-solo",
+          "nombre": "Sentirte solo",
+          "descripcion": "El camino se siente solitario; no tienes a nadie al lado.",
+          "pistas": "alone, lonely road, isolation, walking your path alone"
+        },
+        {
+          "id": "incomprendido",
+          "nombre": "Incomprendido / no encajas",
+          "descripcion": "Nadie entiende tu visión ni tu forma de vivir; te sientes diferente.",
+          "pistas": "people think you're crazy, not like them, misfit, different"
+        },
+        {
+          "id": "dejar-gente-atras",
+          "nombre": "Dejar gente atrás",
+          "descripcion": "Al crecer, amigos o familia se alejan o ya no encajan contigo.",
+          "pistas": "outgrowing people, changing circles, losing friends, who you surround yourself with"
+        },
+        {
+          "id": "sin-apoyo",
+          "nombre": "Sin apoyo",
+          "descripcion": "Nadie te ayuda ni te respalda; te toca solo.",
+          "pistas": "no one is coming to save you, pick yourself, nobody will do it for you"
+        }
+      ],
+      "intensamente": [
+        "tristeza",
+        "verguenza"
+      ]
+    },
+    {
+      "id": "desesperanza",
+      "nombre": "Desesperanza",
+      "descripcion": "No ves salida: sientes que nada va a mejorar o que ya no quieres seguir.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "sin-esperanza",
+          "nombre": "Sin esperanza",
+          "descripcion": "Sientes que nada va a mejorar, hagas lo que hagas.",
+          "pistas": "hopeless, nothing will change, no way out, darkest times"
+        },
+        {
+          "id": "sentirte-una-carga",
+          "nombre": "Sentirte una carga",
+          "descripcion": "Crees que los demás estarían mejor sin ti o que tu vida no importa.",
+          "pistas": "burden, worthless, your life matters, people need you",
+          "crisis": true
+        },
+        {
+          "id": "pensamientos-suicidas",
+          "nombre": "Pensamientos suicidas",
+          "descripcion": "Piensas en quitarte la vida o sientes que ya no quieres vivir.",
+          "pistas": "suicidal thoughts, don't give up on life, your life matters, reach out, he was suicidal and got through it",
+          "crisis": true
+        }
+      ],
+      "crisis": true,
+      "intensamente": [
+        "tristeza",
+        "ennui"
+      ],
+      "croma": 0.45
+    },
+    {
+      "id": "inseguridad",
+      "nombre": "Inseguridad",
+      "descripcion": "No te sientes suficiente; dudas de ti.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "dudar-de-ti",
+          "nombre": "Dudar de ti",
+          "descripcion": "No crees poder lograrlo.",
+          "pistas": "self-doubt, self-belief, confidence, self-image"
+        },
+        {
+          "id": "compararte",
+          "nombre": "Compararte",
+          "descripcion": "Ves a otros adelante y te sientes menos; envidia.",
+          "pistas": "comparison, social media, envy, others' success, jealousy"
+        },
+        {
+          "id": "no-ser-suficiente",
+          "nombre": "No ser suficiente",
+          "descripcion": "Sientes que te falta talento, estudios u origen para ganar.",
+          "pistas": "no degree, no talent, background, not smart enough, impostor"
+        },
+        {
+          "id": "esperar-permiso",
+          "nombre": "Esperar permiso",
+          "descripcion": "Buscas validación o aprobación antes de actuar.",
+          "pistas": "permission, validation, approval, someone to tell you it's time"
+        }
+      ],
+      "intensamente": [
+        "temor",
+        "verguenza"
+      ]
+    },
+    {
+      "id": "desmotivacion",
+      "nombre": "Desmotivación",
+      "descripcion": "Sin ganas de hacer lo que sabes que tienes que hacer.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "flojera",
+          "nombre": "Flojera / sin ganas",
+          "descripcion": "No tienes motivación ni energía para empezar.",
+          "pistas": "motivation, don't feel like it, lazy, manufacture motivation"
+        },
+        {
+          "id": "procrastinacion",
+          "nombre": "Procrastinación",
+          "descripcion": "Lo dejas para después o esperas el momento perfecto.",
+          "pistas": "urgency, someday, later, perfect moment, start now"
+        },
+        {
+          "id": "estancamiento",
+          "nombre": "Estancamiento / conformismo",
+          "descripcion": "Te acomodaste: vives en automático o en la mediocridad.",
+          "pistas": "comfort, complacency, average, settling, mediocrity, autopilot"
+        },
+        {
+          "id": "indisciplina",
+          "nombre": "Falta de disciplina",
+          "descripcion": "Empiezas y no sostienes; rompes las promesas que te haces.",
+          "pistas": "discipline, consistency, habits, promises to yourself, standards"
+        },
+        {
+          "id": "aburrimiento",
+          "nombre": "Aburrimiento / rutina",
+          "descripcion": "Todo se siente igual y nada te emociona.",
+          "pistas": "boredom, routine, same thing every day, monotony"
+        }
+      ],
+      "intensamente": [
+        "ennui"
+      ]
+    },
+    {
+      "id": "miedo",
+      "nombre": "Miedo / Ansiedad",
+      "descripcion": "Nervios, preocupación, miedo a lo que pueda pasar.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "miedo-a-fallar",
+          "nombre": "Miedo a fallar",
+          "descripcion": "No te lanzas por miedo a equivocarte o perder.",
+          "pistas": "fear of failure, risk, playing it safe, taking the shot"
+        },
+        {
+          "id": "que-diran",
+          "nombre": "El qué dirán",
+          "descripcion": "Te frena la opinión, el juicio o la burla de los demás.",
+          "pistas": "what people think, judgment, approval, being embarrassed"
+        },
+        {
+          "id": "incertidumbre",
+          "nombre": "Incertidumbre",
+          "descripcion": "No sabes qué va a pasar; te asusta el cambio y lo desconocido.",
+          "pistas": "uncertainty, change, unknown, comfort zone, chaos in the world"
+        },
+        {
+          "id": "presion",
+          "nombre": "Presión / estrés",
+          "descripcion": "Sientes el peso de expectativas, responsabilidades o del momento.",
+          "pistas": "pressure, stress, overwhelm, anxiety, high stakes"
+        }
+      ],
+      "intensamente": [
+        "temor"
+      ]
+    },
+    {
+      "id": "agotamiento",
+      "nombre": "Agotamiento",
+      "descripcion": "Cansado, al límite, cargando demasiado.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "cansancio",
+          "nombre": "Cansancio",
+          "descripcion": "Estás agotado física o mentalmente.",
+          "pistas": "tired, exhausted, burnout, drained"
+        },
+        {
+          "id": "ganas-de-rendirte",
+          "nombre": "Ganas de rendirte",
+          "descripcion": "Quieres tirar la toalla.",
+          "pistas": "quit, give up, keep going, keep pushing, one more day"
+        },
+        {
+          "id": "carga-pesada",
+          "nombre": "Carga pesada / adversidad",
+          "descripcion": "La vida te está pegando duro o cargas responsabilidades enormes.",
+          "pistas": "hard times, adversity, struggle, heavy loads, storms, suffering"
+        }
+      ],
+      "intensamente": [
+        "ennui",
+        "desagrado"
+      ]
+    },
+    {
+      "id": "culpa",
+      "nombre": "Culpa / Arrepentimiento",
+      "descripcion": "Cargas con lo que hiciste o con lo que dejaste de hacer.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "arrepentimiento",
+          "nombre": "Arrepentimiento",
+          "descripcion": "Te duele lo que no hiciste o el tiempo que perdiste.",
+          "pistas": "regret, wasted time, what could have been, don't die with regret"
+        },
+        {
+          "id": "errores-del-pasado",
+          "nombre": "Errores del pasado",
+          "descripcion": "No te perdonas, cargas con tu pasado o repites los mismos errores.",
+          "pistas": "past mistakes, redemption, fresh start, your past doesn't define you, repeating the same mistakes, learning from mistakes"
+        },
+        {
+          "id": "verguenza",
+          "nombre": "Vergüenza",
+          "descripcion": "Te avergüenza dónde estás o quién has sido.",
+          "pistas": "shame, embarrassed, disgusted with yourself, looking in the mirror"
+        }
+      ],
+      "intensamente": [
+        "verguenza"
+      ]
+    },
+    {
+      "id": "rechazo",
+      "nombre": "Rechazo",
+      "descripcion": "Críticas, burlas, traiciones o gente que no cree en ti.",
+      "valencia": "dificil",
+      "subs": [
+        {
+          "id": "criticas",
+          "nombre": "Críticas y burlas",
+          "descripcion": "Te critican, se burlan o te atacan.",
+          "pistas": "haters, critics, ridicule, trolls, negativity"
+        },
+        {
+          "id": "no-creen-en-ti",
+          "nombre": "No creen en ti",
+          "descripcion": "Familia, amigos o jefes dudan de ti.",
+          "pistas": "doubters, nobody believed in you, told you you couldn't"
+        },
+        {
+          "id": "traicion",
+          "nombre": "Traición",
+          "descripcion": "Alguien cercano te falló o te dio la espalda.",
+          "pistas": "betrayal, fake friends, loyalty, backstabbing"
+        }
+      ],
+      "intensamente": [
+        "desagrado",
+        "verguenza"
       ]
     }
-  ]
+  ],
+  "intensamente": {
+    "alegria": {
+      "nombre": "Alegría",
+      "color": "#F7C948"
+    },
+    "tristeza": {
+      "nombre": "Tristeza",
+      "color": "#4F80D6"
+    },
+    "furia": {
+      "nombre": "Furia",
+      "color": "#E0412F"
+    },
+    "desagrado": {
+      "nombre": "Desagrado",
+      "color": "#6CBF4B"
+    },
+    "temor": {
+      "nombre": "Temor",
+      "color": "#9D6BD8"
+    },
+    "ansiedad": {
+      "nombre": "Ansiedad",
+      "color": "#F28C38"
+    },
+    "envidia": {
+      "nombre": "Envidia",
+      "color": "#33C1B1"
+    },
+    "verguenza": {
+      "nombre": "Vergüenza",
+      "color": "#E97FA5"
+    },
+    "ennui": {
+      "nombre": "Ennui",
+      "color": "#5153A8"
+    }
+  }
 }

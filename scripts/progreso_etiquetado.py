@@ -23,6 +23,7 @@ def bar(frac, width):
 
 
 def snapshot():
+    version = json.load(open(os.path.join(DATA_DIR, "taxonomy.json")))["version"]
     chunks = sorted(glob.glob(os.path.join(DATA_DIR, "chunks", "chunk_*.txt")))
     sizes = {os.path.basename(c)[:-4]: len(re.findall(r"^=== POST ", open(c).read(), re.M)) for c in chunks}
     total = sum(sizes.values())
@@ -32,17 +33,23 @@ def snapshot():
         path = os.path.join(DATA_DIR, "tags", name + ".jsonl")
         if os.path.exists(path):
             lines = [json.loads(line) for line in open(path)]
-            done[name] = os.path.getmtime(path)
-            rows += lines
+            if lines and all(r.get("v", 2) == version for r in lines):
+                done[name] = os.path.getmtime(path)
+                rows += lines
+    en_lotes = 0
+    for path in glob.glob(os.path.join(DATA_DIR, "tags", ".lotes", "*.jsonl")):
+        en_lotes += sum(1 for _ in open(path))
     tagged = len(rows)
     empty = sum(1 for r in rows if not r["tags"])
     subs = Counter(s for r in rows for s, _ in r["tags"])
     in_window = sum(sizes[n] for n, t in done.items() if now - t <= WINDOW_MIN * 60)
     rate = in_window / WINDOW_MIN
 
-    out = [f"Etiquetado AndyGram  ({datetime.now():%H:%M:%S})", ""]
+    out = [f"Etiquetado AndyGram · taxonomía v{version}  ({datetime.now():%H:%M:%S})", ""]
     out.append(f"Bloques: {len(done):>3}/{len(sizes)}  {bar(len(done) / len(sizes), 30)} {len(done) * 100 // len(sizes)}%")
     out.append(f"Notas:   {tagged:,}/{total:,}" + (f" · {empty} sin emoción ({empty * 100 // max(tagged, 1)}%)" if tagged else ""))
+    if en_lotes:
+        out.append(f"En curso: {en_lotes:,} notas guardadas por lotes en bloques sin terminar")
     if len(done) == len(sizes):
         out.append("Ritmo:   terminado")
     elif rate:

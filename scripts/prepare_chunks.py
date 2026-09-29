@@ -24,9 +24,11 @@ def render(p):
 def render_taxonomy(tax):
     out = []
     for e in tax["emociones"]:
-        out.append(f"### {e['nombre'].upper()}: {e['descripcion']}")
+        tipo = "agradable" if e.get("valencia") == "agradable" else "difícil"
+        out.append(f"### {e['nombre'].upper()} ({tipo}): {e['descripcion']}")
         for s in e["subs"]:
-            out.append(f"- `{s['id']}` ({s['nombre']}): {s['descripcion']} Pistas: {s['pistas']}.")
+            aviso = " **Regla estricta, ver arriba.**" if s.get("crisis") else ""
+            out.append(f"- `{s['id']}` ({s['nombre']}): {s['descripcion']} Pistas: {s['pistas']}.{aviso}")
         out.append("")
     return "\n".join(out)
 

@@ -3,6 +3,9 @@ __pycache__/
 .shots/
 data/chunks/
 vault/
+docs/libro/
+docs/*.pdf
+data/tags/.lotes/
 posts/
 viewer/index.html
 viewer/artifact.html

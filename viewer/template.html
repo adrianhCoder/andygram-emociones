@@ -3,29 +3,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
 <style>
-/* Layout: el grafo ocupa la pantalla; arriba flotan la búsqueda y las emociones; a la derecha el panel
-   de lectura (en el celular se apila abajo); la línea de tiempo corre bajo el grafo.
-   Un solo look oscuro, a propósito: es el mapa estilo Obsidian que se pidió. */
+/* Layout: arriba la búsqueda y las emociones; abajo el grafo; a la derecha el panel de lectura
+   (en el celular se apila abajo); la línea de tiempo corre bajo el grafo.
+   Dos modos: claro y noche. Cada emoción tiene su color de Intensamente (o la mezcla de dos). */
 :root {
-  color-scheme: dark;
-  --bg: #0f1218;
-  --panel: #151920;
-  --raised: #1c212b;
-  --hair: rgba(236, 238, 243, 0.10);
-  --ink: #eceef3;
-  --ink-2: #a9afbd;
-  --ink-3: #7c8394;
-  --accent: #d95926;
-  --series: #3987e5;
-  --rec-0: #9ec5f4;
-  --rec-1: #6da7ec;
-  --rec-2: #3987e5;
-  --rec-3: #256abf;
-  --rec-4: #184f95;
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --raised: #eef1f5;
+  --hair: rgba(22, 26, 34, 0.12);
+  --hair-strong: rgba(22, 26, 34, 0.3);
+  --ink: #161a22;
+  --ink-2: #4a5160;
+  --ink-3: #6a7180;
+  --accent: #c2410c;
+  --shadow: rgba(22, 26, 34, 0.16);
   --display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
   --ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --read: "Source Serif 4", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1218; --panel: #151920; --raised: #1c212b;
+    --hair: rgba(236, 238, 243, 0.10); --hair-strong: rgba(236, 238, 243, 0.3);
+    --ink: #eceef3; --ink-2: #a9afbd; --ink-3: #7c8394;
+    --accent: #d95926; --shadow: rgba(0, 0, 0, 0.45);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1218; --panel: #151920; --raised: #1c212b;
+  --hair: rgba(236, 238, 243, 0.10); --hair-strong: rgba(236, 238, 243, 0.3);
+  --ink: #eceef3; --ink-2: #a9afbd; --ink-3: #7c8394;
+  --accent: #d95926; --shadow: rgba(0, 0, 0, 0.45);
 }
 html { height: 100%; box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
@@ -70,6 +82,19 @@ button { cursor: pointer; }
   text-transform: uppercase;
 }
 .brand p { margin: 0; color: var(--ink-3); font-size: 12px; }
+.theme-btn {
+  margin-left: auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  border-radius: 50%;
+  border: 1px solid var(--hair);
+  background: var(--panel);
+  color: var(--ink-2);
+}
+.theme-btn:hover { color: var(--ink); border-color: var(--hair-strong); }
 .search { position: relative; width: min(100%, 420px); }
 .search svg { position: absolute; left: 11px; top: 50%; translate: 0 -50%; color: var(--ink-3); }
 .search input {
@@ -82,12 +107,14 @@ button { cursor: pointer; }
 }
 .search input::placeholder { color: var(--ink-3); }
 .search input:focus-visible { border-color: var(--ink-2); }
-.chips { display: flex; gap: 6px; flex-wrap: wrap; min-width: 0; max-width: 900px; }
+.chips { display: grid; gap: 6px; min-width: 0; }
+.chip-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.chip-label { margin-right: 2px; font: 500 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 .chip {
   display: inline-flex;
   align-items: baseline;
   gap: 6px;
-  padding: 5px 11px;
+  padding: 5px 10px;
   border-radius: 999px;
   border: 1px solid var(--hair);
   background: color-mix(in srgb, var(--panel) 88%, transparent);
@@ -96,8 +123,9 @@ button { cursor: pointer; }
   white-space: nowrap;
 }
 .chip .n { color: var(--ink-3); font: 500 11px var(--mono); font-variant-numeric: tabular-nums; }
-.chip:hover { color: var(--ink); border-color: rgba(236, 238, 243, 0.3); }
-.chip[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.chip:hover { color: var(--ink); border-color: var(--hair-strong); }
+.chip[aria-pressed="true"] { color: var(--ink); border-color: var(--c, var(--accent)); box-shadow: inset 0 0 0 1px var(--c, var(--accent)); }
+.chip .key { width: 8px; height: 8px; border-radius: 50%; flex: none; align-self: center; }
 
 .legend {
   position: absolute;
@@ -148,7 +176,7 @@ button { cursor: pointer; }
   border-radius: 8px;
   background: var(--raised);
   border: 1px solid var(--hair);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 28px var(--shadow);
   pointer-events: none;
   font-size: 12.5px;
   line-height: 1.4;
@@ -179,7 +207,7 @@ button { cursor: pointer; }
   background: var(--raised);
   color: var(--ink);
 }
-.round-btn:hover { border-color: rgba(236, 238, 243, 0.3); }
+.round-btn:hover { border-color: var(--hair-strong); }
 .tl-date { font: 500 13px var(--mono); color: var(--ink); min-width: 8ch; font-variant-numeric: tabular-nums; }
 .tl-track { position: relative; height: 42px; min-width: 0; }
 .tl-track canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -256,7 +284,10 @@ button { cursor: pointer; }
 .emo-item:hover { background: var(--raised); }
 .emo-item .name { font-weight: 600; color: var(--ink); }
 .emo-item .count { font: 500 12px var(--mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.emo-item .bar { grid-column: 1 / -1; height: 4px; border-radius: 0 2px 2px 0; background: var(--series); }
+.emo-item .bar { grid-column: 1 / -1; height: 4px; border-radius: 0 2px 2px 0; background: var(--c, var(--ink-3)); }
+.emo-item .name { display: inline-flex; align-items: center; gap: 8px; }
+.emo-item .key, .io-line .key { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.io-line { display: flex; align-items: center; gap: 8px; margin: -6px 0 14px; font-size: 12px; color: var(--ink-3); }
 .emo-item .subs { grid-column: 1 / -1; font-size: 12px; color: var(--ink-3); }
 .post-item {
   width: 100%;
@@ -273,7 +304,7 @@ button { cursor: pointer; }
 .post-item .title { font-weight: 600; color: var(--ink); }
 .post-item .consejo { font-size: 13px; color: var(--ink-2); }
 .central { display: inline-flex; align-items: center; gap: 5px; }
-.central::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.central::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--emo, var(--accent)); }
 .filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
 .more {
   margin-top: 14px;
@@ -307,7 +338,14 @@ button { cursor: pointer; }
   font-weight: 500;
   text-decoration: none;
 }
-.read-btn:hover { border-color: rgba(236, 238, 243, 0.3); }
+.read-btn:hover { border-color: var(--hair-strong); }
+.group-title { margin: 18px 0 6px; font: 500 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.crisis { display: grid; gap: 8px; margin: 2px 0 18px; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--hair-strong); background: var(--raised); }
+.crisis .c-title { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.crisis p { margin: 0; color: var(--ink-2); }
+.crisis ul { display: grid; gap: 6px; margin: 2px 0; padding: 0; list-style: none; }
+.crisis li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; color: var(--ink); }
+.crisis a { font: 500 15px var(--mono); color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink-3); }
 .foot { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--ink-3); display: grid; gap: 8px; }
 .foot p { margin: 0; }
 
@@ -315,7 +353,8 @@ button { cursor: pointer; }
   .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto auto; }
   .brand h1 { font-size: 24px; }
   .brand p { display: none; }
-  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .chips { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; }
+  .chip-group { flex-wrap: nowrap; }
   .chips::-webkit-scrollbar { display: none; }
   .legend { display: none; }
   .timeline { grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 10px; padding: 8px 16px; }
@@ -358,6 +397,7 @@ button { cursor: pointer; }
       <div class="brand">
         <h1>AndyGram</h1>
         <p id="brand-sub">Mapa emocional</p>
+        <button class="theme-btn" id="theme-btn" type="button" aria-label="Cambiar de modo"></button>
       </div>
       <label class="search">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
@@ -415,10 +455,10 @@ button { cursor: pointer; }
   const nf = new Intl.NumberFormat('es-MX');
   const plural = (n, one, many) => `${nf.format(n)} ${n === 1 ? one : many}`;
 
-  const emotions = RAW.emotions.map((e, i) => ({ i, id: e.id, name: e.name, desc: e.desc, subs: [] }));
+  const emotions = RAW.emotions.map((e, i) => ({ i, id: e.id, name: e.name, desc: e.desc, good: e.valence === 'agradable', crisis: !!e.crisis, colors: e.color, io: e.io, subs: [] }));
   const subs = [];
   RAW.emotions.forEach((e, ei) => e.subs.forEach((s) => {
-    const sub = { i: subs.length, id: s.id, name: s.name, desc: s.desc, emo: ei };
+    const sub = { i: subs.length, id: s.id, name: s.name, desc: s.desc, emo: ei, crisis: !!s.crisis || !!e.crisis };
     subs.push(sub);
     emotions[ei].subs.push(sub.i);
   }));
@@ -441,16 +481,42 @@ button { cursor: pointer; }
   };
 
   // ---------- Colores (tokens) ----------
+  // Se leen del CSS y se vuelven a leer al cambiar de modo (claro / noche).
+  const THEME_KEY = 'andygram-tema';
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+  } catch (err) { /* sin almacenamiento: se usa el modo del sistema */ }
   const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const hexToRgb = (h) => [1, 3, 5].map((k) => parseInt(h.slice(k, k + 2), 16));
   const rgba = (hex, a) => `rgba(${hexToRgb(hex).join(',')},${a})`;
-  const C = {
-    bg: cssVar('--bg'), raised: cssVar('--raised'), ink: cssVar('--ink'), ink2: cssVar('--ink-2'),
-    ink3: cssVar('--ink-3'), accent: cssVar('--accent'),
-    rec: [0, 1, 2, 3, 4].map((k) => cssVar(`--rec-${k}`)),
+  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => {
+    const t = document.documentElement.getAttribute('data-theme');
+    return t ? t === 'dark' : darkQuery.matches;
   };
+  let C = {};
+  let LINK = {};
+  function readColors() {
+    const dark = isDark();
+    C = {
+      bg: cssVar('--bg'), raised: cssVar('--raised'), ink: cssVar('--ink'), ink2: cssVar('--ink-2'),
+      ink3: cssVar('--ink-3'), accent: cssVar('--accent'),
+      emo: emotions.map((e) => (dark ? e.colors.dark : e.colors.light)),
+    };
+    LINK = {
+      dim: rgba(C.ink, 0.025),
+      hover: rgba(C.ink, 0.5),
+      se: C.emo.map((c) => rgba(c, dark ? 0.45 : 0.55)),
+      ps: C.emo.map((c) => rgba(c, dark ? 0.1 : 0.16)),
+      focusSe: C.emo.map((c) => rgba(c, 0.9)),
+      focusPs: C.emo.map((c) => rgba(c, 0.55)),
+    };
+  }
+  readColors();
   const FONT_UI = '"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif';
-  const REC_LABELS = ['menos de 3 meses', '3 a 12 meses', '1 a 2 años', '2 a 4 años', 'más de 4 años'];
+  // Más tenue = más antigua, respecto a la fecha de la línea de tiempo.
+  const REC_ALPHA = [1, 0.85, 0.7, 0.55, 0.42];
   const recBin = (p) => {
     const age = state.day - p.day;
     return age < 90 ? 0 : age < 365 ? 1 : age < 730 ? 2 : age < 1460 ? 3 : 4;
@@ -475,10 +541,15 @@ button { cursor: pointer; }
 
   // ---------- Grafo: nodos y enlaces ----------
   const TAU = Math.PI * 2;
-  const R_RING = 640;
+  // Anillo: las emociones agradables quedan arriba y, enfrente de cada una, su contraria.
+  const R_RING = Math.round(640 * Math.sqrt(Math.max(11, emotions.length) / 11));
+  const RING_OFFSET = Math.max(0, (emotions.filter((e) => e.good).length - 1) / 2);
+  const SUB_SPREAD = Math.min(0.13, (TAU / emotions.length) * 0.3);
+  const GROUPS = [['Agradables', emotions.filter((e) => e.good)], ['Difíciles', emotions.filter((e) => !e.good)]]
+    .filter(([, list]) => list.length);
   const R_POST = 2.6;
   const emoNodes = emotions.map((e, k) => {
-    const a = -Math.PI / 2 + (k * TAU) / emotions.length;
+    const a = -Math.PI / 2 + ((k - RING_OFFSET) * TAU) / emotions.length;
     const x = Math.cos(a) * R_RING;
     const y = Math.sin(a) * R_RING;
     return { id: `e${k}`, kind: 'e', ref: e, a, ax: x, ay: y, x, y, r: 12, count: 0 };
@@ -487,7 +558,7 @@ button { cursor: pointer; }
     const hub = emoNodes[s.emo];
     const siblings = emotions[s.emo].subs;
     const j = siblings.indexOf(s.i) - (siblings.length - 1) / 2;
-    const a = hub.a + j * 0.13;
+    const a = hub.a + j * SUB_SPREAD;
     const x = Math.cos(a) * R_RING * 0.74;
     const y = Math.sin(a) * R_RING * 0.74;
     return { id: `s${s.i}`, kind: 's', ref: s, ax: x, ay: y, x, y, r: 4, count: 0 };
@@ -565,18 +636,46 @@ button { cursor: pointer; }
   }
   const narrow = () => graphEl.clientWidth < 600;
   const hubLabel = (n) => (narrow() ? n.ref.name.split(' / ')[0] : n.ref.name).toUpperCase();
-  function hubLabelPos(n, k) {
+  const hubFont = () => (narrow() ? 11 : 13.5);
+  function hubLabelPos(n, k, extra = 0) {
     const cx = Math.cos(n.a), cy = Math.sin(n.a);
     if (narrow()) {
-      const d = (n.r + 5 / k) * (cy > 0 ? 1 : -1);
-      return { x: n.x, y: n.y + d, align: 'center', baseline: cy > 0 ? 'top' : 'bottom' };
+      return { x: n.x + cx * extra, y: n.y + (cy > 0 ? 1 : -1) * (n.r + 5 / k) + cy * extra, align: 'center', baseline: cy > 0 ? 'top' : 'bottom' };
     }
-    const d = n.r + 7 / k;
+    const d = n.r + 7 / k + extra;
     return {
       x: n.x + cx * d, y: n.y + cy * d,
-      align: cx > 0.35 ? 'left' : cx < -0.35 ? 'right' : 'center',
+      align: cx > 0.12 ? 'left' : cx < -0.12 ? 'right' : 'center',
       baseline: cy > 0.35 ? 'top' : cy < -0.35 ? 'bottom' : 'middle',
     };
+  }
+  // Etiquetas de emociones sin choques: las más grandes eligen primero; si una se encima con otra,
+  // se empuja hacia afuera del anillo.
+  let hubLabels = new Map();
+  function labelBox(lp, w, h) {
+    const x0 = lp.align === 'left' ? lp.x : lp.align === 'right' ? lp.x - w : lp.x - w / 2;
+    const y0 = lp.baseline === 'top' ? lp.y : lp.baseline === 'bottom' ? lp.y - h : lp.y - h / 2;
+    return { x0, y0, x1: x0 + w, y1: y0 + h };
+  }
+  const overlaps = (a, b, pad) => a.x0 < b.x1 + pad && b.x0 < a.x1 + pad && a.y0 < b.y1 + pad && b.y0 < a.y1 + pad;
+  function layoutHubLabels(ctx, k) {
+    const size = hubFont() / k;
+    ctx.font = `600 ${size}px ${FONT_UI}`;
+    const placed = [];
+    hubLabels = new Map();
+    for (const n of [...emoNodes].sort((a, b) => b.count - a.count)) {
+      const text = hubLabel(n);
+      const w = ctx.measureText(text).width, h = size * 1.2;
+      let best = null;
+      for (let step = 0; step < 5; step++) {
+        const lp = hubLabelPos(n, k, (step * 12) / k);
+        const box = labelBox(lp, w, h);
+        best = { ...lp, box, text };
+        if (!placed.some((b) => overlaps(b, box, 3 / k))) break;
+      }
+      placed.push(best.box);
+      hubLabels.set(n, best);
+    }
   }
   const isFocusedPost = (n) => state.focus && state.focus.kind === 'p' && state.focus.node === n;
   function subLabelVisible(n, k) {
@@ -589,14 +688,30 @@ button { cursor: pointer; }
     const on = !HL || HL.has(n);
     const inFocus = !!(state.focus && state.focus.set.has(n));
     if (n.kind === 'p') {
-      ctx.globalAlpha = on ? 1 : 0.1;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, R_POST, 0, TAU);
-      ctx.fillStyle = inFocus && state.focus.kind !== 'p' ? C.accent : C.rec[recBin(n.ref)];
-      ctx.fill();
+      // Como los recuerdos de Intensamente: del color de su emoción; si tiene varias, partida en sus colores.
+      const cols = n.ref.emos;
+      const age = REC_ALPHA[recBin(n.ref)];
+      ctx.globalAlpha = on ? (inFocus ? Math.max(0.8, age) : age) : 0.07;
+      if (cols.length <= 1) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, R_POST, 0, TAU);
+        ctx.fillStyle = C.emo[cols[0]];
+        ctx.fill();
+      } else {
+        const step = TAU / cols.length;
+        for (let j = 0; j < cols.length; j++) {
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.arc(n.x, n.y, R_POST, -Math.PI / 2 + j * step, -Math.PI / 2 + (j + 1) * step);
+          ctx.closePath();
+          ctx.fillStyle = C.emo[cols[j]];
+          ctx.fill();
+        }
+      }
       if (isFocusedPost(n) || state.hover === n) {
+        ctx.globalAlpha = 1;
         ctx.lineWidth = 2 / k;
-        ctx.strokeStyle = isFocusedPost(n) ? C.accent : C.ink;
+        ctx.strokeStyle = C.ink;
         ctx.beginPath();
         ctx.arc(n.x, n.y, R_POST + 3 / k, 0, TAU);
         ctx.stroke();
@@ -608,13 +723,14 @@ button { cursor: pointer; }
     if (n.kind === 's') {
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, TAU);
-      ctx.fillStyle = inFocus ? C.accent : C.ink3;
+      ctx.fillStyle = C.emo[n.ref.emo];
       ctx.fill();
       if (subLabelVisible(n, k)) textAt(ctx, n.ref.name, n.x + n.r + 4 / k, n.y, 11.5 / k, 500, inFocus ? C.ink : C.ink2, k, 'left', 'middle');
     } else {
+      const col = C.emo[n.ref.i];
       const glow = ctx.createRadialGradient(n.x, n.y, n.r * 0.5, n.x, n.y, n.r * 2.8);
-      glow.addColorStop(0, rgba(inFocus ? C.accent : C.ink, inFocus ? 0.4 : 0.16));
-      glow.addColorStop(1, rgba(inFocus ? C.accent : C.ink, 0));
+      glow.addColorStop(0, rgba(col, inFocus ? 0.5 : 0.22));
+      glow.addColorStop(1, rgba(col, 0));
       ctx.fillStyle = glow;
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r * 2.8, 0, TAU);
@@ -623,11 +739,11 @@ button { cursor: pointer; }
       ctx.arc(n.x, n.y, n.r, 0, TAU);
       ctx.fillStyle = C.raised;
       ctx.fill();
-      ctx.lineWidth = 1.8 / k;
-      ctx.strokeStyle = inFocus ? C.accent : C.ink2;
+      ctx.lineWidth = (inFocus ? 2.8 : 2) / k;
+      ctx.strokeStyle = col;
       ctx.stroke();
-      const lp = hubLabelPos(n, k);
-      textAt(ctx, hubLabel(n), lp.x, lp.y, 13.5 / k, 600, C.ink, k, lp.align, lp.baseline);
+      const lp = hubLabels.get(n) || { ...hubLabelPos(n, k), text: hubLabel(n) };
+      textAt(ctx, lp.text, lp.x, lp.y, hubFont() / k, 600, C.ink, k, lp.align, lp.baseline);
     }
     ctx.globalAlpha = 1;
   }
@@ -636,25 +752,16 @@ button { cursor: pointer; }
     ctx.beginPath();
     ctx.arc(n.x, n.y, Math.max(n.kind === 'p' ? R_POST : n.r, 11 / k), 0, TAU);
     ctx.fill();
-    if (n.kind === 'e') {
-      ctx.font = `600 ${13.5 / k}px ${FONT_UI}`;
-      const w = ctx.measureText(hubLabel(n)).width;
-      const lp = hubLabelPos(n, k);
-      const x0 = lp.align === 'left' ? lp.x : lp.align === 'right' ? lp.x - w : lp.x - w / 2;
-      const h = 18 / k;
-      const y0 = lp.baseline === 'top' ? lp.y : lp.baseline === 'bottom' ? lp.y - h : lp.y - h / 2;
-      ctx.fillRect(x0, y0, w, h);
-    }
+    const lp = n.kind === 'e' && hubLabels.get(n);
+    if (lp) ctx.fillRect(lp.box.x0, lp.box.y0, lp.box.x1 - lp.box.x0, lp.box.y1 - lp.box.y0);
   }
-  const LINK = {
-    se: rgba(C.ink, 0.22), ps: rgba(C.ink, 0.07), dim: rgba(C.ink, 0.025), hover: rgba(C.ink, 0.5),
-    focusSe: rgba(C.accent, 0.85), focusPs: rgba(C.accent, 0.5),
-  };
   function linkOn(l) { return HL && HL.has(l.source) && HL.has(l.target); }
+  const linkEmo = (l) => (l.kind === 'se' ? l.source.ref.emo : l.target.ref.emo);
   function linkColor(l) {
-    if (!HL) return l.kind === 'se' ? LINK.se : LINK.ps;
+    const e = linkEmo(l);
+    if (!HL) return l.kind === 'se' ? LINK.se[e] : LINK.ps[e];
     if (!linkOn(l)) return LINK.dim;
-    if (state.focus && state.focus.set.has(l.source) && state.focus.set.has(l.target)) return l.kind === 'se' ? LINK.focusSe : LINK.focusPs;
+    if (state.focus && state.focus.set.has(l.source) && state.focus.set.has(l.target)) return l.kind === 'se' ? LINK.focusSe[e] : LINK.focusPs[e];
     return LINK.hover;
   }
   function linkWidth(l) {
@@ -755,6 +862,7 @@ button { cursor: pointer; }
       .onNodeHover(onHover)
       .onNodeClick(onNodeClick)
       .onBackgroundClick(() => { hideTip(); clearFocus(); })
+      .onRenderFramePre(layoutHubLabels)
       .onRenderFramePost(drawOverlay);
     G.d3Force('center', null);
     G.d3Force('charge').strength((n) => (n.kind === 'e' ? -900 : n.kind === 's' ? -150 : -10)).distanceMax(450);
@@ -976,7 +1084,7 @@ button { cursor: pointer; }
       const bh = monthTotals[m] * scale;
       ctx.fillRect(x0, base - bh, bw, bh);
       if (focusCounts[m]) {
-        ctx.fillStyle = C.accent;
+        ctx.fillStyle = f.kind === 'e' ? C.emo[f.ref.i] : f.kind === 's' ? C.emo[f.ref.emo] : C.accent;
         const fh = focusCounts[m] * scale;
         ctx.fillRect(x0, base - fh, bw, fh);
       }
@@ -1097,20 +1205,27 @@ button { cursor: pointer; }
   const chipsEl = document.getElementById('chips');
   function renderChips() {
     const f = state.focus;
-    chipsEl.replaceChildren(...emotions.map((e) => el('button', {
+    const chip = (e) => el('button', {
       class: 'chip',
       type: 'button',
+      style: `--c:${C.emo[e.i]}`,
       'aria-pressed': String(!!f && ((f.kind === 'e' && f.ref.i === e.i) || (f.kind === 's' && f.ref.emo === e.i))),
       onclick: () => selectEmotion(e.i),
-    }, e.name, el('span', { class: 'n', text: nf.format(emoNodes[e.i].count) }))));
+    }, el('i', { class: 'key', style: `background:${C.emo[e.i]}` }), e.name, el('span', { class: 'n', text: nf.format(emoNodes[e.i].count) }));
+    chipsEl.replaceChildren(...GROUPS.map(([label, list]) => el('div', { class: 'chip-group', role: 'group', 'aria-label': `Emociones ${label.toLowerCase()}` },
+      el('span', { class: 'chip-label', text: label }), list.map(chip))));
   }
   function renderLegend() {
     const legend = document.getElementById('legend');
-    const ramp = el('span', { class: 'ramp' }, ...C.rec.map((c, k) => el('i', { class: 'dot', style: `background:${c}`, title: REC_LABELS[k] })));
-    const items = [el('span', null, 'Nota reciente', ramp, 'antigua')];
+    const idx = (id) => Math.max(0, emotions.findIndex((e) => e.id === id));
+    const mezcla = `background:conic-gradient(${C.emo[idx('felicidad')]} 0 50%, ${C.emo[idx('tristeza')]} 0 100%)`;
+    const items = [
+      el('span', null, el('i', { class: 'dot', style: `background:${C.emo[idx('enojo')]}` }), 'Color de su emoción, como en Intensamente'),
+      el('span', null, el('i', { class: 'dot', style: mezcla }), 'Varias emociones'),
+      el('span', null, el('i', { class: 'dot', style: `background:${C.ink3};opacity:0.45` }), 'Más tenue, más antigua'),
+    ];
     const f = state.focus;
-    if (f && (f.kind === 'e' || f.kind === 's')) items.push(el('span', null, el('i', { class: 'dot', style: `background:${C.accent}` }), `Notas de ${f.ref.name}`));
-    else if (f && f.kind === 'q') items.push(el('span', null, el('i', { class: 'dot', style: `background:${C.accent}` }), 'Resultados de la búsqueda'));
+    if (f && f.kind === 'q') items.push(el('span', null, el('i', { class: 'dot', style: `background:${C.accent}` }), 'Resultados de la búsqueda'));
     else if (f && f.kind === 'p') items.push(el('span', null, el('i', { class: 'dot', style: `border:1.5px solid ${C.ink2}` }), 'Notas parecidas'));
     legend.replaceChildren(...items);
   }
@@ -1128,6 +1243,20 @@ button { cursor: pointer; }
   panelHead.addEventListener('click', () => setCollapsed(!panel.classList.contains('collapsed')));
 
   const visible = (p) => p.day <= state.day;
+  const CRISIS_WORDS = ['suicid', 'matarme', 'quitarme la vida', 'no quiero vivir', 'ya no quiero seguir', 'morirme', 'desaparecer',
+    'kill myself', 'end my life', 'want to die'];
+  const crisisQuery = (q) => CRISIS_WORDS.some((w) => norm(q).includes(w));
+  function crisisCard() {
+    const linea = (nombre, numero, tel) => el('li', null, el('span', { text: nombre }), el('a', { href: `tel:${tel}`, text: numero }));
+    return el('div', { class: 'crisis', role: 'note' },
+      el('p', { class: 'c-title', text: 'Si estás pensando en quitarte la vida, no estás solo.' }),
+      el('p', { text: 'Habla hoy con alguien. Contestan a cualquier hora y es gratis:' }),
+      el('ul', null,
+        linea('Línea de la Vida', '800 911 2000', '8009112000'),
+        linea('SAPTEL', '55 5259 8121', '5552598121'),
+        linea('Emergencias', '911', '911')),
+      el('p', { class: 'small', text: 'Las notas de Andy pueden acompañarte, pero no sustituyen hablar con una persona.' }));
+  }
   function postItem(p, w) {
     return el('li', null, el('button', { class: 'post-item', type: 'button', onclick: () => openPost(p) },
       el('span', { class: 'meta' }, fmtDate(p.date), w === 3 && el('span', { class: 'central', text: 'tema central' })),
@@ -1153,12 +1282,15 @@ button { cursor: pointer; }
     return [
       el('p', { class: 'eyebrow', text: 'Mapa emocional' }),
       el('h2', { text: '¿Cómo te sientes hoy?' }),
-      el('p', { class: 'lead', text: 'Cada punto es una nota diaria de Andy Frisella. Las líneas la unen con el sentimiento al que le habla. Elige una emoción para leer sus notas, primero las que la tratan como tema central.' }),
-      el('ul', { class: 'emo-list' }, emotions.map((e) => el('li', null, el('button', { class: 'emo-item', type: 'button', onclick: () => selectEmotion(e.i) },
-        el('span', { class: 'name', text: e.name }),
-        el('span', { class: 'count', text: nf.format(emoNodes[e.i].count) }),
-        el('span', { class: 'bar', style: `width:${(emoNodes[e.i].count / max) * 100}%` }),
-        el('span', { class: 'subs', text: e.subs.map((s) => subs[s].name).join(' · ') }))))),
+      el('p', { class: 'lead', text: 'Cada punto es una nota diaria de Andy Frisella, unida a los sentimientos a los que le habla. Arriba del anillo están las emociones agradables y, enfrente de cada una, su contraria. Elige una para leer sus notas, primero las que la tratan como tema central.' }),
+      ...GROUPS.map(([label, list]) => [
+        el('p', { class: 'group-title', text: `Emociones ${label.toLowerCase()}` }),
+        el('ul', { class: 'emo-list' }, list.map((e) => el('li', null, el('button', { class: 'emo-item', type: 'button', style: `--c:${C.emo[e.i]}`, onclick: () => selectEmotion(e.i) },
+          el('span', { class: 'name' }, el('i', { class: 'key', style: `background:${C.emo[e.i]}` }), e.name),
+          el('span', { class: 'count', text: nf.format(emoNodes[e.i].count) }),
+          el('span', { class: 'bar', style: `width:${(emoNodes[e.i].count / max) * 100}%` }),
+          el('span', { class: 'subs', text: e.subs.map((s) => subs[s].name).join(' · ') }))))),
+      ]).flat(),
       el('div', { class: 'foot' },
         el('p', { text: `${plural(shown, 'nota', 'notas')} del ${fmtDate(posts[0].date)} al ${fmtDay(state.day)}. ${plural(untagged, 'nota no le habla', 'notas no le hablan')} a ninguna emoción en particular: no aparecen en el mapa, pero sí en la búsqueda.` }),
         el('p', { text: 'Las emociones y los consejos en español los asignó una IA leyendo cada nota; pueden tener errores. Los textos son de Andy Frisella.' }),
@@ -1173,12 +1305,15 @@ button { cursor: pointer; }
     for (const n of f.set) if (n.kind === 'p' && visible(n.ref)) items.push(n.ref);
     items.sort((a, b) => weightFor(b, f) - weightFor(a, f) || b.day - a.day);
     phTitle.textContent = `${v.ref.name} · ${plural(items.length, 'nota', 'notas')}`;
-    const subChip = (label, count, pressed, onclick) => el('button', { class: 'chip', type: 'button', 'aria-pressed': String(pressed), onclick }, label, el('span', { class: 'n', text: nf.format(count) }));
+    const subChip = (label, count, pressed, onclick) => el('button', { class: 'chip', type: 'button', style: `--c:${C.emo[e.i]}`, 'aria-pressed': String(pressed), onclick }, label, el('span', { class: 'n', text: nf.format(count) }));
+    const ioText = e.io.length === 1 ? `Color de Intensamente: ${e.io[0]}` : `Color: mezcla de ${e.io[0]} y ${e.io[1]}, de Intensamente`;
     return [
       el('button', { class: 'back', type: 'button', onclick: clearFocus }, '← Todas las emociones'),
       el('p', { class: 'eyebrow', text: isEmo ? 'Emoción' : e.name }),
       el('h2', { text: v.ref.name }),
       el('p', { class: 'lead', text: v.ref.desc }),
+      el('p', { class: 'io-line' }, el('i', { class: 'key', style: `background:${C.emo[e.i]}` }), ioText),
+      (e.crisis || (!isEmo && v.ref.crisis)) && crisisCard(),
       el('div', { class: 'filters' },
         subChip('Todas', emoNodes[e.i].count, isEmo, () => selectEmotion(e.i)),
         e.subs.map((si) => subChip(subs[si].name, subNodes[si].count, !isEmo && v.ref.i === si, () => selectSub(si)))),
@@ -1198,6 +1333,7 @@ button { cursor: pointer; }
       el('button', { class: 'back', type: 'button', onclick: goBack }, state.back && state.back.view.name !== 'home' ? '← Volver a la lista' : '← Todas las emociones'),
       el('p', { class: 'eyebrow', text: fmtDate(p.date) }),
       el('h2', { text: p.title }),
+      p.tags.some(([s]) => subs[s].crisis) && crisisCard(),
       p.tags.length ? el('div', { class: 'tags' }, p.tags.map(([s, w]) => el('button', { class: 'chip', type: 'button', onclick: () => selectSub(s) }, subs[s].name, el('span', { class: 'n', text: w === 3 ? 'central' : emotions[subs[s].emo].name })))) : null,
       p.body ? el('div', { class: 'body' }, paras) : null,
       el('p', null, el('a', { class: p.body ? 'link' : 'read-btn', href: p.url, target: '_blank', rel: 'noopener', text: p.body ? 'Ver en andyfrisella.com ↗' : 'Ver la nota en andyfrisella.com ↗' })),
@@ -1216,6 +1352,7 @@ button { cursor: pointer; }
       el('button', { class: 'back', type: 'button', onclick: () => { qEl.value = ''; runSearch(''); clearFocus(); } }, '← Todas las emociones'),
       el('p', { class: 'eyebrow', text: 'Búsqueda' }),
       el('h2', { text: `“${v.q}”` }),
+      crisisQuery(v.q) && crisisCard(),
       chips.length ? el('div', { class: 'filters' }, chips) : null,
       el('p', { class: 'small', text: v.hits.length ? `${plural(v.hits.length, 'nota menciona', 'notas mencionan')} “${v.q}”${untilNote()}, de la más reciente a la más antigua. ${SEARCH_SCOPE}` : `Ninguna nota menciona “${v.q}”${untilNote()}. ${SEARCH_SCOPE} Prueba con otra palabra o elige una emoción.` }),
       ...listWithMore(v.hits.map((p) => postItem(p, 0))),
@@ -1229,6 +1366,8 @@ button { cursor: pointer; }
     else if (v.name === 'search') content = viewSearch(v);
     else content = viewHome();
     panelBody.replaceChildren(...content.filter(Boolean));
+    const emoIdx = v.name === 'list' ? (v.kind === 'e' ? v.ref.i : v.ref.emo) : null;
+    panelBody.style.setProperty('--emo', emoIdx === null ? '' : C.emo[emoIdx]);
     panel.classList.toggle('reading', v.name === 'post');
     if (scrollTop) {
       panelBody.scrollTop = 0;
@@ -1242,6 +1381,33 @@ button { cursor: pointer; }
     if (state.view.name === 'post') goBack(); else if (state.focus) clearFocus();
   });
 
+  // ---------- Modo claro / noche ----------
+  const themeBtn = document.getElementById('theme-btn');
+  const SUN = 'M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10zM11 1h2v3h-2zM11 20h2v3h-2zM1 11h3v2H1zM20 11h3v2h-3zM4.2 5.6l1.4-1.4 2.1 2.1-1.4 1.4zM16.3 17.7l1.4-1.4 2.1 2.1-1.4 1.4zM4.2 18.4l2.1-2.1 1.4 1.4-2.1 2.1zM16.3 6.3l2.1-2.1 1.4 1.4-2.1 2.1z';
+  const MOON = 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z';
+  function renderThemeBtn() {
+    const dark = isDark();
+    themeBtn.setAttribute('aria-label', dark ? 'Cambiar a modo claro' : 'Cambiar a modo noche');
+    themeBtn.title = dark ? 'Modo claro' : 'Modo noche';
+    themeBtn.replaceChildren(svgIcon(dark ? SUN : MOON));
+  }
+  function applyTheme() {
+    readColors();
+    if (G) { G.backgroundColor(C.bg); requestRedraw(); }
+    renderThemeBtn();
+    renderChips();
+    renderLegend();
+    drawTimeline();
+    renderPanel();
+  }
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (err) { /* sin almacenamiento */ }
+  });
+  darkQuery.addEventListener('change', applyTheme);
+  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
   // ---------- Arranque ----------
   rangeEl.value = String(state.day);
   document.getElementById('tl-date').textContent = fmtDay(state.day);
@@ -1249,6 +1415,7 @@ button { cursor: pointer; }
   initGraph();
   if (!G) updateCounts();
   renderPlay();
+  renderThemeBtn();
   renderChips();
   renderLegend();
   renderPanel();

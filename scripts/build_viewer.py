@@ -12,6 +12,7 @@ import glob
 import json
 import os
 
+from colores import colores_emociones
 from corpus import DATA_DIR, ROOT, load_posts
 
 BASE_URL = "https://andyfrisella.com/blogs/andygram/"
@@ -30,9 +31,9 @@ SHELL = """<!doctype html>
 
 
 def load_tags():
-    """Etiquetas por id de nota. La prueba (pilot) va primero y la corrida completa la sobreescribe."""
+    """Etiquetas por id de nota. Las pruebas (pilot*) van primero y la corrida completa las sobreescribe."""
     paths = sorted(glob.glob(os.path.join(DATA_DIR, "tags", "*.jsonl")),
-                   key=lambda p: (not p.endswith("pilot.jsonl"), p))
+                   key=lambda p: (not os.path.basename(p).startswith("pilot"), p))
     tags = {}
     for path in paths:
         for line in open(path, encoding="utf-8"):
@@ -60,9 +61,13 @@ def build_data(full_text=True):
             [index[s] for s, _ in similar.get(p["id"], [])[:4]],
             "\n".join(p["paragraphs"]) if full_text else "",
         ])
+    colores = colores_emociones(tax)
     emotions = [{
         "id": e["id"], "name": e["nombre"], "desc": e["descripcion"],
-        "subs": [{"id": s["id"], "name": s["nombre"], "desc": s["descripcion"]} for s in e["subs"]],
+        "valence": e.get("valencia", "dificil"), "crisis": bool(e.get("crisis")),
+        "color": colores[e["id"]], "io": [tax["intensamente"][k]["nombre"] for k in e["intensamente"]],
+        "subs": [{"id": s["id"], "name": s["nombre"], "desc": s["descripcion"], "crisis": bool(s.get("crisis"))}
+                 for s in e["subs"]],
     } for e in tax["emociones"]]
     return {"emotions": emotions, "baseUrl": BASE_URL, "fullText": full_text, "posts": rows}, len(tags), len(posts)
 
