@@ -1,0 +1,8 @@
+scrape.log
+__pycache__/
+.shots/
+data/chunks/
+vault/
+posts/
+viewer/index.html
+viewer/artifact.html

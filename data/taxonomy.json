@@ -1,0 +1,334 @@
+{
+  "version": 2,
+  "emociones": [
+    {
+      "id": "enojo",
+      "nombre": "Enojo",
+      "descripcion": "Coraje, rabia o molestia contra situaciones o personas.",
+      "subs": [
+        {
+          "id": "frustracion",
+          "nombre": "Frustración",
+          "descripcion": "Las cosas no salen, te topas con pared, el avance es lento.",
+          "pistas": "setbacks, things not working, obstacles, slow progress"
+        },
+        {
+          "id": "resentimiento",
+          "nombre": "Resentimiento",
+          "descripcion": "Rencor guardado contra quien te hizo menos, dudó de ti o te lastimó.",
+          "pistas": "bitterness, grudges, people who wronged or doubted you, letting go"
+        },
+        {
+          "id": "injusticia",
+          "nombre": "Injusticia",
+          "descripcion": "Sientes que la vida, el sistema o los demás no juegan limpio contigo.",
+          "pistas": "life isn't fair, others had it easier, luck, privilege, circumstances as excuse"
+        },
+        {
+          "id": "impaciencia",
+          "nombre": "Impaciencia",
+          "descripcion": "Quieres resultados ya y te desespera lo que tarda.",
+          "pistas": "overnight success, patience, long game, compounding, time"
+        }
+      ]
+    },
+    {
+      "id": "agresion",
+      "nombre": "Agresión",
+      "descripcion": "Energía intensa, ganas de pelear o de arrasar; qué hacer con ella.",
+      "subs": [
+        {
+          "id": "ganas-de-explotar",
+          "nombre": "Ganas de explotar",
+          "descripcion": "Impulso de reaccionar, pelear o desquitarte; sientes que pierdes el control.",
+          "pistas": "emotional control, don't react, discipline over emotions, temper"
+        },
+        {
+          "id": "canalizar-la-furia",
+          "nombre": "Canalizar la furia",
+          "descripcion": "Usar la rabia y la intensidad como combustible para trabajar y ganar.",
+          "pistas": "use it as fuel, chip on your shoulder, attack your goals, intensity, killer instinct"
+        },
+        {
+          "id": "revancha",
+          "nombre": "Revancha",
+          "descripcion": "Quieres demostrarles a todos que se equivocaron contigo.",
+          "pistas": "prove them wrong, make yourself impossible to ignore, let results talk"
+        }
+      ]
+    },
+    {
+      "id": "tristeza",
+      "nombre": "Tristeza / Depresión",
+      "descripcion": "Estás abajo, sin ánimo, sin ver salida.",
+      "subs": [
+        {
+          "id": "desanimo",
+          "nombre": "Desánimo",
+          "descripcion": "Bajón: todo pesa y no ves avance.",
+          "pistas": "feeling down, discouraged, low days, rough patch"
+        },
+        {
+          "id": "vacio",
+          "nombre": "Vacío",
+          "descripcion": "Te sientes apagado, nada te llena.",
+          "pistas": "numb, empty, depressed, lost joy"
+        },
+        {
+          "id": "duelo",
+          "nombre": "Duelo / pérdida",
+          "descripcion": "Perdiste a alguien o algo importante.",
+          "pistas": "death, loss, grief, tragedy, life is short"
+        },
+        {
+          "id": "derrota",
+          "nombre": "Derrota",
+          "descripcion": "Fallaste o perdiste y te sientes derrotado.",
+          "pistas": "failure, losing, getting knocked down, bouncing back"
+        },
+        {
+          "id": "lastima-propia",
+          "nombre": "Lástima por ti",
+          "descripcion": "Victimismo: '¿por qué a mí?', quejas y excusas.",
+          "pistas": "self-pity, victim mentality, complaining, excuses, blame"
+        },
+        {
+          "id": "negatividad",
+          "nombre": "Negatividad / pesimismo",
+          "descripcion": "Todo lo ves mal; la queja y el pesimismo te consumen.",
+          "pistas": "negativity, pessimism, cynicism, seeing the worst in everything"
+        }
+      ]
+    },
+    {
+      "id": "soledad",
+      "nombre": "Soledad",
+      "descripcion": "Te sientes solo, aislado o incomprendido en tu camino.",
+      "subs": [
+        {
+          "id": "sentirte-solo",
+          "nombre": "Sentirte solo",
+          "descripcion": "El camino se siente solitario; no tienes a nadie al lado.",
+          "pistas": "alone, lonely road, isolation, walking your path alone"
+        },
+        {
+          "id": "incomprendido",
+          "nombre": "Incomprendido / no encajas",
+          "descripcion": "Nadie entiende tu visión ni tu forma de vivir; te sientes diferente.",
+          "pistas": "people think you're crazy, not like them, misfit, different"
+        },
+        {
+          "id": "dejar-gente-atras",
+          "nombre": "Dejar gente atrás",
+          "descripcion": "Al crecer, amigos o familia se alejan o ya no encajan contigo.",
+          "pistas": "outgrowing people, changing circles, losing friends, who you surround yourself with"
+        },
+        {
+          "id": "sin-apoyo",
+          "nombre": "Sin apoyo",
+          "descripcion": "Nadie te ayuda ni te respalda; te toca solo.",
+          "pistas": "no one is coming to save you, pick yourself, nobody will do it for you"
+        }
+      ]
+    },
+    {
+      "id": "miedo",
+      "nombre": "Miedo / Ansiedad",
+      "descripcion": "Nervios, preocupación, miedo a lo que pueda pasar.",
+      "subs": [
+        {
+          "id": "miedo-a-fallar",
+          "nombre": "Miedo a fallar",
+          "descripcion": "No te lanzas por miedo a equivocarte o perder.",
+          "pistas": "fear of failure, risk, playing it safe, taking the shot"
+        },
+        {
+          "id": "que-diran",
+          "nombre": "El qué dirán",
+          "descripcion": "Te frena la opinión, el juicio o la burla de los demás.",
+          "pistas": "what people think, judgment, approval, being embarrassed"
+        },
+        {
+          "id": "incertidumbre",
+          "nombre": "Incertidumbre",
+          "descripcion": "No sabes qué va a pasar; te asusta el cambio y lo desconocido.",
+          "pistas": "uncertainty, change, unknown, comfort zone, chaos in the world"
+        },
+        {
+          "id": "presion",
+          "nombre": "Presión / estrés",
+          "descripcion": "Sientes el peso de expectativas, responsabilidades o del momento.",
+          "pistas": "pressure, stress, overwhelm, anxiety, high stakes"
+        }
+      ]
+    },
+    {
+      "id": "inseguridad",
+      "nombre": "Inseguridad",
+      "descripcion": "No te sientes suficiente; dudas de ti.",
+      "subs": [
+        {
+          "id": "dudar-de-ti",
+          "nombre": "Dudar de ti",
+          "descripcion": "No crees poder lograrlo.",
+          "pistas": "self-doubt, self-belief, confidence, self-image"
+        },
+        {
+          "id": "compararte",
+          "nombre": "Compararte",
+          "descripcion": "Ves a otros adelante y te sientes menos; envidia.",
+          "pistas": "comparison, social media, envy, others' success, jealousy"
+        },
+        {
+          "id": "no-ser-suficiente",
+          "nombre": "No ser suficiente",
+          "descripcion": "Sientes que te falta talento, estudios u origen para ganar.",
+          "pistas": "no degree, no talent, background, not smart enough, impostor"
+        },
+        {
+          "id": "esperar-permiso",
+          "nombre": "Esperar permiso",
+          "descripcion": "Buscas validación o aprobación antes de actuar.",
+          "pistas": "permission, validation, approval, someone to tell you it's time"
+        }
+      ]
+    },
+    {
+      "id": "desmotivacion",
+      "nombre": "Desmotivación",
+      "descripcion": "Sin ganas de hacer lo que sabes que tienes que hacer.",
+      "subs": [
+        {
+          "id": "flojera",
+          "nombre": "Flojera / sin ganas",
+          "descripcion": "No tienes motivación ni energía para empezar.",
+          "pistas": "motivation, don't feel like it, lazy, manufacture motivation"
+        },
+        {
+          "id": "procrastinacion",
+          "nombre": "Procrastinación",
+          "descripcion": "Lo dejas para después o esperas el momento perfecto.",
+          "pistas": "urgency, someday, later, perfect moment, start now"
+        },
+        {
+          "id": "estancamiento",
+          "nombre": "Estancamiento / conformismo",
+          "descripcion": "Te acomodaste: vives en automático o en la mediocridad.",
+          "pistas": "comfort, complacency, average, settling, mediocrity, autopilot"
+        },
+        {
+          "id": "indisciplina",
+          "nombre": "Falta de disciplina",
+          "descripcion": "Empiezas y no sostienes; rompes las promesas que te haces.",
+          "pistas": "discipline, consistency, habits, promises to yourself, standards"
+        }
+      ]
+    },
+    {
+      "id": "agotamiento",
+      "nombre": "Agotamiento",
+      "descripcion": "Cansado, al límite, cargando demasiado.",
+      "subs": [
+        {
+          "id": "cansancio",
+          "nombre": "Cansancio",
+          "descripcion": "Estás agotado física o mentalmente.",
+          "pistas": "tired, exhausted, burnout, drained"
+        },
+        {
+          "id": "ganas-de-rendirte",
+          "nombre": "Ganas de rendirte",
+          "descripcion": "Quieres tirar la toalla.",
+          "pistas": "quit, give up, keep going, keep pushing, one more day"
+        },
+        {
+          "id": "carga-pesada",
+          "nombre": "Carga pesada / adversidad",
+          "descripcion": "La vida te está pegando duro o cargas responsabilidades enormes.",
+          "pistas": "hard times, adversity, struggle, heavy loads, storms, suffering"
+        }
+      ]
+    },
+    {
+      "id": "culpa",
+      "nombre": "Culpa / Arrepentimiento",
+      "descripcion": "Cargas con lo que hiciste o con lo que dejaste de hacer.",
+      "subs": [
+        {
+          "id": "arrepentimiento",
+          "nombre": "Arrepentimiento",
+          "descripcion": "Te duele lo que no hiciste o el tiempo que perdiste.",
+          "pistas": "regret, wasted time, what could have been, don't die with regret"
+        },
+        {
+          "id": "errores-del-pasado",
+          "nombre": "Errores del pasado",
+          "descripcion": "No te perdonas, cargas con tu pasado o repites los mismos errores.",
+          "pistas": "past mistakes, redemption, fresh start, your past doesn't define you, repeating the same mistakes, learning from mistakes"
+        },
+        {
+          "id": "verguenza",
+          "nombre": "Vergüenza",
+          "descripcion": "Te avergüenza dónde estás o quién has sido.",
+          "pistas": "shame, embarrassed, disgusted with yourself, looking in the mirror"
+        }
+      ]
+    },
+    {
+      "id": "rechazo",
+      "nombre": "Rechazo",
+      "descripcion": "Críticas, burlas, traiciones o gente que no cree en ti.",
+      "subs": [
+        {
+          "id": "criticas",
+          "nombre": "Críticas y burlas",
+          "descripcion": "Te critican, se burlan o te atacan.",
+          "pistas": "haters, critics, ridicule, trolls, negativity"
+        },
+        {
+          "id": "no-creen-en-ti",
+          "nombre": "No creen en ti",
+          "descripcion": "Familia, amigos o jefes dudan de ti.",
+          "pistas": "doubters, nobody believed in you, told you you couldn't"
+        },
+        {
+          "id": "traicion",
+          "nombre": "Traición",
+          "descripcion": "Alguien cercano te falló o te dio la espalda.",
+          "pistas": "betrayal, fake friends, loyalty, backstabbing"
+        }
+      ]
+    },
+    {
+      "id": "sin-rumbo",
+      "nombre": "Sin rumbo",
+      "descripcion": "Perdido: sin propósito o sin saber qué hacer.",
+      "subs": [
+        {
+          "id": "sin-proposito",
+          "nombre": "Sin propósito",
+          "descripcion": "No sabes para qué haces lo que haces.",
+          "pistas": "purpose, meaning, why, calling, legacy"
+        },
+        {
+          "id": "confusion",
+          "nombre": "Confusión / indecisión",
+          "descripcion": "No sabes qué camino tomar.",
+          "pistas": "decisions, clarity, direction, priorities, what to do"
+        },
+        {
+          "id": "atrapado",
+          "nombre": "Atrapado",
+          "descripcion": "Tu trabajo, tu vida o tus circunstancias te tienen encerrado.",
+          "pistas": "trapped, cage, dead-end job, freedom, break free"
+        },
+        {
+          "id": "insatisfaccion",
+          "nombre": "Insatisfacción",
+          "descripcion": "Logras cosas pero nada te llena; no valoras lo que tienes o nunca es suficiente.",
+          "pistas": "gratitude vs hunger, never satisfied, appreciate what you have, fulfillment"
+        }
+      ]
+    }
+  ]
+}
