@@ -144,6 +144,12 @@ button { cursor: pointer; }
 .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex: none; }
 .ramp { display: inline-flex; gap: 3px; }
 .view-btns { position: absolute; right: 16px; bottom: 12px; display: flex; gap: 6px; }
+/* Pantalla completa: solo el mapa y la línea de tiempo */
+.app.inmersivo { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+.app.inmersivo .stage { grid-template-rows: minmax(0, 1fr); }
+.app.inmersivo .top,
+.app.inmersivo .legend,
+.app.inmersivo .panel { display: none; }
 .icon-btn {
   display: inline-flex;
   align-items: center;
@@ -412,6 +418,7 @@ button { cursor: pointer; }
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>
         Ver todo
       </button>
+      <button class="icon-btn" id="fullscreen" type="button" aria-pressed="false" title="Ver solo el mapa y la animación"></button>
     </div>
   </section>
 
@@ -1378,8 +1385,46 @@ button { cursor: pointer; }
   document.addEventListener('keydown', (ev) => {
     if (ev.key !== 'Escape' || ev.target === qEl) return;
     hideTip();
+    if (immersive) { exitImmersive(); return; }
     if (state.view.name === 'post') goBack(); else if (state.focus) clearFocus();
   });
+
+  // ---------- Pantalla completa: solo el mapa y la animación ----------
+  const appEl = document.querySelector('.app');
+  const fsBtn = document.getElementById('fullscreen');
+  const EXPAND = 'M3 3h7v2H5v5H3zM14 3h7v7h-2V5h-5zM3 14h2v5h5v2H3zM19 14h2v7h-7v-2h5z';
+  const COMPRESS = 'M8 3h2v7H3V8h5zM14 3h2v5h5v2h-7zM3 14h7v7H8v-5H3zM14 14h7v2h-5v5h-2z';
+  let immersive = false;
+  function setImmersive(on) {
+    immersive = on;
+    appEl.classList.toggle('inmersivo', on);
+    fsBtn.setAttribute('aria-pressed', String(on));
+    fsBtn.title = on ? 'Salir de pantalla completa (Esc)' : 'Ver solo el mapa y la animación';
+    fsBtn.replaceChildren(svgIcon(on ? COMPRESS : EXPAND), on ? 'Salir' : 'Pantalla completa');
+    hideTip();
+    setTimeout(() => {
+      if (G) {
+        G.width(graphEl.clientWidth).height(graphEl.clientHeight);
+        G.zoomToFit(DUR, fitPad());
+      }
+      drawTimeline();
+    }, 80);
+  }
+  function exitImmersive() {
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+    setImmersive(false);
+  }
+  fsBtn.addEventListener('click', () => {
+    if (immersive) { exitImmersive(); return; }
+    setImmersive(true);
+    // La pantalla completa del navegador es opcional: en algunos marcos y celulares no está permitida.
+    const root = document.documentElement;
+    if (root.requestFullscreen && !document.fullscreenElement) root.requestFullscreen().catch(() => {});
+  });
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && immersive) setImmersive(false);
+  });
+  setImmersive(false);
 
   // ---------- Modo claro / noche ----------
   const themeBtn = document.getElementById('theme-btn');
